@@ -1,4 +1,6 @@
 import userSchema from "../models/users.model.js";
+import { usersCollection } from "../database/db.js";
+import bcrypt from "bcrypt";
 
 export function userValidation(req, res, next) {
   const user = req.body;
@@ -10,6 +12,29 @@ export function userValidation(req, res, next) {
   }
 
   res.locals.user = user;
+
+  next();
+}
+
+export async function signInValidation(req, res, next) {
+  const { email, password } = req.body;
+
+  try {
+    const user = await usersCollection.findOne({ email });
+    res.locals.user = user;
+    if (!user) {
+      return res.status(401).send("Usuário ou senha incorretos");
+    }
+    const passwordOk = bcrypt.compareSync(password, user.password);
+    if (!passwordOk) {
+      return res.status(401).send("Usuário ou senha incorretos");
+    }
+    console.log("user no midd", user);
+    res.locals = user;
+  } catch (err) {
+    console.log(err);
+    res.sendStatus(500);
+  }
 
   next();
 }

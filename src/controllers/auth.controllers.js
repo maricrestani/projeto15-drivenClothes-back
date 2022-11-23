@@ -1,5 +1,6 @@
-import { usersCollection } from "../database/db.js";
+import { usersCollection, sessionsCollection } from "../database/db.js";
 import bcrypt from "bcrypt";
+import { v4 as uuidV4 } from "uuid";
 
 export async function signUp(req, res) {
   const { name, email, password } = res.locals.user;
@@ -20,4 +21,17 @@ export async function signUp(req, res) {
   }
 }
 
-export async function signIn(res, req) {}
+export async function signIn(res, req) {
+  console.log("help", res.locals);
+  const user = res.locals;
+  console.log("user no controller", user);
+  const token = uuidV4();
+
+  try {
+    await sessionsCollection.insertOne({ token, userId: user._id });
+    res.send({ token });
+  } catch (error) {
+    console.log(error);
+    res.sendStatus(500);
+  }
+}
