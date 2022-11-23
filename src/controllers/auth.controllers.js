@@ -19,3 +19,5 @@ export async function signUp(req, res) {
     res.sendStatus(500);
   }
 }
+
+export async function signIn(res, req) {}
