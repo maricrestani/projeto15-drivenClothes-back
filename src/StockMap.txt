@@ -1,0 +1,25 @@
+prefixo 10 = Blusas
+1001 = Blusa Azul
+1002 = Branca
+1003 = Preta
+1004 = Verde
+
+preefixo 20 = Calças
+2001 = Azul
+2002 = Branca
+2003 = Marrom
+2004 = Preta
+
+prefixo 30 = Casacos
+
+3001 = Azul
+3002 = Branco
+3003 = Preto
+3004 = Verde
+
+prefixo 40 = Tenis
+
+4001 = azul
+4002 = branco
+4003 = preto
+4004 = Verde
