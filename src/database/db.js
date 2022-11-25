@@ -19,3 +19,4 @@ const db = mongoClient.db("DrivenClothes");
 export const usersCollection = db.collection("users");
 export const sessionsCollection = db.collection("sessions");
 export const stockCollection = db.collection("stock");
+export const cartCollection = db.collection("cart");
