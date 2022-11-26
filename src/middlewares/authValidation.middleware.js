@@ -1,5 +1,5 @@
 import userSchema from "../models/users.model.js";
-import { usersCollection } from "../database/db.js";
+import { usersCollection, sessionsCollection } from "../database/db.js";
 import bcrypt from "bcrypt";
 
 export function userValidation(req, res, next) {
@@ -31,6 +31,33 @@ export async function signInValidation(req, res, next) {
     }
     console.log("user no midd", user);
     res.locals = user;
+  } catch (err) {
+    console.log(err);
+    res.sendStatus(500);
+  }
+
+  next();
+}
+
+export async function authValidation(req, res, next) {
+  const { authorization } = req.headers;
+  const token = authorization?.replace("Bearer ", "");
+
+  if (!token) {
+    return res.sendStatus(401);
+  }
+
+  try {
+    const session = await sessionsCollection.findOne({ token });
+    if (!session) {
+      return res.sendStatus(401);
+    }
+    const user = await usersCollection.findOne({ _id: session?.userId });
+    if (!user) {
+      return res.sendStatus(401);
+    }
+
+    res.locals.user = user;
   } catch (err) {
     console.log(err);
     res.sendStatus(500);

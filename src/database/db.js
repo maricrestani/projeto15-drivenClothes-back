@@ -20,3 +20,4 @@ export const usersCollection = db.collection("users");
 export const sessionsCollection = db.collection("sessions");
 export const stockCollection = db.collection("stock");
 export const cartCollection = db.collection("cart");
+export const checkoutCollection = db.collection("checkout")
