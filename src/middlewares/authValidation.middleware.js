@@ -21,7 +21,6 @@ export async function signInValidation(req, res, next) {
 
   try {
     const user = await usersCollection.findOne({ email });
-    res.locals.user = user;
     if (!user) {
       return res.status(401).send("Usuário ou senha incorretos");
     }
@@ -30,7 +29,7 @@ export async function signInValidation(req, res, next) {
       return res.status(401).send("Usuário ou senha incorretos");
     }
     console.log("user no midd", user);
-    res.locals = user;
+    res.locals.user = user;
   } catch (err) {
     console.log(err);
     res.sendStatus(500);
