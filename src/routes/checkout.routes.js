@@ -1,9 +1,8 @@
 import Router from "express";
-//import { CloseOrder} from "../controllers/checkout.controllers.js";
+import { CloseOrder} from "../controllers/checkout.controller.js";
 
 const router = Router();
 
-//post dos produtos selecionado + adress + card na checkoutCollection//
-//router.post("/checkout", CloseOrder);
+router.post("/checkout", CloseOrder);
 
 export default router;
