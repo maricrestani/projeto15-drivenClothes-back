@@ -25,19 +25,8 @@ export async function GetCart(req, res) {
   }
 }
 
-/* export async function DeleteItem(req, res) {
-  const id = req.body;
-  console.log(id);
-  try {
-    await cartCollection.deleteOne({ _id: ObjectId(id) });
-    res.send(id);
-  } catch (err) {
-    res.send(err);
-  }
-} */
 export async function DeleteItem(req, res) {
   const { id } = req.params;
-  console.log(id);
   try {
     await cartCollection.deleteOne({ _id: ObjectId(id) });
     res.send(id);
