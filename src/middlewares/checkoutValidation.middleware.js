@@ -6,8 +6,6 @@ export function checkoutValidation(req, res, next) {
   const { error } = checkoutSchema.validate(checkout, { abortEarly: false });
   if (error) {
     const errors = error.details.map((detail) => detail.message);
-    console.log(checkout);
-    console.log(errors);
     return res.status(400).send(errors);
   }
 
