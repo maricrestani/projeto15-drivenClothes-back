@@ -2,6 +2,8 @@ import { stockCollection } from "../database/db.js";
 import bcrypt from "bcrypt";
 import { v4 as uuidV4 } from "uuid";
 
+// O pedido de estoque chega para o back que adiciona a quantidade de estoque
+// o código de cada produto é informado no StockMap
 export async function Stockin(req, res) {
   const { serial, number } = req.body;
   try {
